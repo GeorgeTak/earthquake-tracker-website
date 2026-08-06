@@ -37,3 +37,4 @@ For full details, read the complete [Privacy Policy](privacy-policy.html).
 If you have any questions, feedback, or inquiries regarding the app, feel free to reach out via email:
 
 * **Developer Email:** `ece01911@uowm.gr`
+  
