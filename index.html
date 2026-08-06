@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthquake Tracker - Live Seismic Monitoring</title>
+    <style>
+        :root {
+            --primary: #673ab7;
+            --primary-dark: #512da8;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --text: #ffffff;
+            --text-secondary: #b0bec5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-secondary);
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">🚨 Earthquake Tracker</div>
+        <p class="tagline">Real-time global seismic monitoring, custom distance alerts, and live USGS map integrations.</p>
+    </header>
+
+    <main>
+        <h2>Key Features</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🌍 Real-Time Data</h3>
+                <p>Direct integration with the USGS global API to fetch recent seismic events accurate to the minute.</p>
+            </div>
+            <div class="card">
+                <h3>📍 Proximity Radius</h3>
+                <p>Filter magnitude thresholds and seismic activity within a custom radius from your current location.</p>
+            </div>
+            <div class="card">
+                <h3>🔔 Instant Alerts</h3>
+                <p>High-priority notifications and safety alarms triggered when high-magnitude quakes are detected nearby(Planned for a future update).</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Earthquake Tracker. All rights reserved.</p>
+        <p>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </p>
+    </footer>
+
+</body>
+</html>
