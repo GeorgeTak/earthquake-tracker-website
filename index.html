@@ -114,6 +114,61 @@
             display: block;
             border-radius: 16px;  
         }
+
+        .updates-section {
+            margin-top: 3.5rem;
+        }
+
+        .update-card {
+            background-color: var(--card-bg);
+            padding: 1.75rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+            border-left: 4px solid var(--primary);
+            margin-top: 1rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .update-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .update-list li {
+            position: relative;
+            padding-left: 1.75rem;
+            margin-bottom: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .update-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .update-list li::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0.5rem;
+            top: -0.3rem;
+        }
+
+        .update-list strong {
+            color: var(--text);
+        }
     </style>
 </head>
 <body>
@@ -144,11 +199,27 @@
                 <p>Switch seamlessly between list view and an interactive radar map with locked rotation, magnitude pins, and instant epicenter details.</p>
             </div>
         </div>
+        <section class="updates-section">
+            <h2>What's New</h2>
+            <div class="update-card">
+                <span class="version-badge">Version 1.0.4</span>
+                <ul class="update-list">
+                    <li>
+                        <strong>Critical Infrastructure & Hazard Overlays:</strong> The interactive map view now includes pinpointed locations of famous volcanoes and active nuclear power plants to help assess regional risk.
+                    </li>
+                    <li>
+                        <strong>Dynamic Haptic Feedback:</strong> Feel the seismic event directly on your device with magnitude-scaled vibrations that vary in intensity depending on earthquake strength.
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Earthquake Tracker. All rights reserved.</p>
         <p>
+            <a href="https://play.google.com/store/apps/details?id=com.tak.flutter.earthquake_app" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
+            <span>•</span>
             <a href="privacy-policy.html">Privacy Policy</a>
         </p>
     </footer>
