@@ -57,17 +57,17 @@
             display: grid;
             gap: 1.5rem;
             margin-top: 2rem;
-         }
+        }
         
         @media (min-width: 900px) {
             .grid {
-               grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
-         }
+        }
 
         @media (max-width: 899px) {
             .grid {
-               grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             }
         }
 
@@ -89,32 +89,7 @@
             margin-bottom: 0;
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--card-bg);
-            color: var(--text-secondary);
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .app-logo {
-            width: 120px;         
-            height: auto;
-            margin: 1rem auto;    
-            display: block;
-            border-radius: 16px;  
-        }
-
+        /* What's New Section */
         .updates-section {
             margin-top: 3.5rem;
         }
@@ -142,7 +117,7 @@
         .update-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 0 0 1.5rem 0;
         }
 
         .update-list li {
@@ -170,30 +145,42 @@
             color: var(--text);
         }
 
-        .update-screenshots {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
+        /* Swipeable Screenshots Carousel */
+        .carousel-wrapper {
+            position: relative;
             margin-top: 1.5rem;
         }
 
+        .update-screenshots {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 1rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .update-screenshots::-webkit-scrollbar {
+            display: none;
+        }
+
         .screenshot-item {
+            flex: 0 0 260px;
+            scroll-snap-align: center;
             text-align: center;
+            user-select: none;
         }
 
         .screenshot-item img {
             width: 100%;
-            max-width: 280px;
             height: auto;
             border-radius: 12px;
             border: 1px solid #333;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .screenshot-item img:hover {
-            transform: scale(1.03);
-            border-color: var(--primary);
+            display: block;
+            pointer-events: none;
         }
 
         .screenshot-caption {
@@ -201,6 +188,57 @@
             color: var(--text-secondary);
             margin-top: 0.6rem;
             font-weight: 500;
+        }
+
+        /* Carousel Navigation Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #333;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-secondary);
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .app-logo {
+            width: 120px;          
+            height: auto;
+            margin: 1rem auto;    
+            display: block;
+            border-radius: 16px;  
         }
     </style>
 </head>
@@ -232,27 +270,47 @@
                 <p>Switch seamlessly between list view and an interactive radar map with locked rotation, magnitude pins, and instant epicenter details.</p>
             </div>
         </div>
+
+        <!-- What's New Section -->
         <section class="updates-section">
             <h2>What's New</h2>
             <div class="update-card">
-                <span class="version-badge">Version 1.0.4</span>
+                <span class="version-badge">Version 1.0.5</span>
                 <ul class="update-list">
                     <li>
-                        <strong>Critical Infrastructure & Hazard Overlays:</strong> The interactive map view now includes pinpointed locations of famous volcanoes and active nuclear power plants to help assess regional risk.
+                        <strong>Tectonic Plate Boundaries & Fault Lines:</strong> Trace Earth's major fault lines directly on the interactive map with a dedicated switch button to toggle them on or off anytime[cite: 1, 2].
                     </li>
                     <li>
-                        <strong>Dynamic Haptic Feedback:</strong> Feel the seismic event directly on your device with magnitude-scaled vibrations that vary in intensity depending on earthquake strength.
+                        <strong>Seismic Education & Insights:</strong> Explore dynamic tectonic plate mechanics and understand where over 80% of global earthquakes strike along converging and shifting plates[cite: 2].
+                    </li>
+                    <li>
+                        <strong>Hazards & Haptic Feedback:</strong> Includes active volcano overlays, nuclear power plant markers, and magnitude-scaled vibration feedback.
                     </li>
                 </ul>
-                <div class="update-screenshots">
-                    <div class="screenshot-item">
-                        <img src="volcanoes-map.png" alt="Map view showing active and famous volcano pins">
-                        <div class="screenshot-caption">🌋 Active Volcano Overlays</div>
+
+                <!-- Swipeable Screenshots Carousel -->
+                <div class="carousel-wrapper">
+                    <div class="update-screenshots" id="screenshotsTrack">
+                        <div class="screenshot-item">
+                            <img src="fault_lines_screen.jpg" alt="Interactive map showing orange fault lines and seismic pins">
+                            <div class="screenshot-caption">🗺️ Fault Lines Map Overlay</div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="tectonic_plate_info.png" alt="In-app guide explaining tectonic plates and fault line boundaries">
+                            <div class="screenshot-caption">ℹ️ Tectonic Plates Guide</div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="volcanoes-map.png" alt="Map view showing active volcano pins">
+                            <div class="screenshot-caption">🌋 Volcano Overlays</div>
+                        </div>
+                        <div class="screenshot-item">
+                            <img src="nuclear-plants-map.png" alt="Map view showing global nuclear power plant locations">
+                            <div class="screenshot-caption">☢️ Nuclear Power Plants</div>
+                        </div>
                     </div>
-                    <div class="screenshot-item">
-                        <img src="nuclear-plants-map.png" alt="Map view showing global nuclear power plant locations">
-                        <div class="screenshot-caption">☢️ Nuclear Power Plant Markers</div>
-                    </div>
+
+                    <!-- Indicator Dots -->
+                    <div class="carousel-dots" id="carouselDots"></div>
                 </div>
             </div>
         </section>
@@ -267,5 +325,41 @@
         </p>
     </footer>
 
+    <script>
+        const track = document.getElementById('screenshotsTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+        const slides = track.querySelectorAll('.screenshot-item');
+
+        // Dynamically create interactive navigation dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            dot.setAttribute('aria-label', `Slide ${index + 1}`);
+            if (index === 0) dot.classList.add('active');
+
+            dot.addEventListener('click', () => {
+                slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+
+            dotsContainer.appendChild(dot);
+        });
+
+        // Track swipe position and update active dot
+        const dots = dotsContainer.querySelectorAll('.dot');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Array.from(slides).indexOf(entry.target);
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[index]) dots[index].classList.add('active');
+                }
+            });
+        }, {
+            root: track,
+            threshold: 0.6
+        });
+
+        slides.forEach(slide => observer.observe(slide));
+    </script>
 </body>
 </html>
