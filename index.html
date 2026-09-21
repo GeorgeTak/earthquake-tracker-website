@@ -53,7 +53,7 @@
                 </ul>
 
                 <div class="carousel-wrapper">
-                    <div class="update-screenshots">
+                    <div class="update-screenshots" id="track-106">
                         <div class="screenshot-item">
                             <img src="images/home_pin.jpg" alt="Radar map showing personal home pin" onerror="this.onerror=null; this.src='images/home_pin_screen.jpg';">
                             <div class="screenshot-caption">📍 Personal Home Pin</div>
@@ -88,7 +88,7 @@
 
                 <!-- Swipeable Screenshots Carousel -->
                 <div class="carousel-wrapper">
-                    <div class="update-screenshots" id="screenshotsTrack">
+                    <div class="update-screenshots" id="track-105">
                         <div class="screenshot-item">
                             <img src="images/fault_lines_screen.png" alt="Interactive map showing orange fault lines and seismic pins">
                             <div class="screenshot-caption">🗺️ Fault Lines Map Overlay</div>
@@ -126,57 +126,64 @@
         </p>
     </footer>
 
-    <script>
-        const track = document.getElementById('screenshotsTrack');
-        const dotsContainer = document.getElementById('carouselDots');
-        const slides = track.querySelectorAll('.screenshot-item');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+<script>
+        function setupCarousel(trackId, dotsId, prevBtnId, nextBtnId) {
+            const track = document.getElementById(trackId);
+            const dotsContainer = document.getElementById(dotsId);
+            const prevBtn = document.getElementById(prevBtnId);
+            const nextBtn = document.getElementById(nextBtnId);
 
-        let currentIndex = 0;
+            if (!track || !dotsContainer) return;
 
-        function scrollToSlide(index) {
-            if (index < 0) index = 0;
-            if (index >= slides.length) index = slides.length - 1;
-            slides[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            const slides = track.querySelectorAll('.screenshot-item');
+            let currentIndex = 0;
+
+            function scrollToSlide(index) {
+                if (index < 0) index = 0;
+                if (index >= slides.length) index = slides.length - 1;
+                slides[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            }
+
+            // Create dots dynamically
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('dot');
+                dot.setAttribute('aria-label', `Slide ${index + 1}`);
+                if (index === 0) dot.classList.add('active');
+
+                dot.addEventListener('click', () => scrollToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            // Button listeners
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => scrollToSlide(currentIndex - 1));
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => scrollToSlide(currentIndex + 1));
+            }
+
+            // Sync active dot with scrolling
+            const dots = dotsContainer.querySelectorAll('.dot');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        currentIndex = Array.from(slides).indexOf(entry.target);
+                        dots.forEach(d => d.classList.remove('active'));
+                        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+                    }
+                });
+            }, {
+                root: track,
+                threshold: 0.7
+            });
+
+            slides.forEach(slide => observer.observe(slide));
         }
 
-        // Generate interactive dots
-        slides.forEach((slide, index) => {
-            const dot = document.createElement('button');
-            dot.classList.add('dot');
-            dot.setAttribute('aria-label', `Slide ${index + 1}`);
-            if (index === 0) dot.classList.add('active');
-
-            dot.addEventListener('click', () => scrollToSlide(index));
-            dotsContainer.appendChild(dot);
-        });
-
-        // Previous & Next navigation
-        prevBtn.addEventListener('click', () => {
-            scrollToSlide(currentIndex - 1);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            scrollToSlide(currentIndex + 1);
-        });
-
-        // Track active slide to update indicator dots
-        const dots = dotsContainer.querySelectorAll('.dot');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    currentIndex = Array.from(slides).indexOf(entry.target);
-                    dots.forEach(d => d.classList.remove('active'));
-                    if (dots[currentIndex]) dots[currentIndex].classList.add('active');
-                }
-            });
-        }, {
-            root: track,
-            threshold: 0.7
-        });
-
-        slides.forEach(slide => observer.observe(slide));
+        // Initialize both version carousels
+        setupCarousel('track-106', 'dots-106', 'prevBtn-106', 'nextBtn-106');
+        setupCarousel('track-105', 'dots-105', 'prevBtn-105', 'nextBtn-105');
     </script>
 </body>
 </html>
