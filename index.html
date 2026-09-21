@@ -145,57 +145,95 @@
             color: var(--text);
         }
 
-        /* Swipeable Screenshots Carousel */
+        /* Single Slide Carousel Wrapper */
         .carousel-wrapper {
             position: relative;
-            margin-top: 1.5rem;
+            max-width: 320px;
+            margin: 2rem auto 0 auto;
         }
 
         .update-screenshots {
             display: flex;
-            gap: 1.5rem;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
-            padding: 1rem 0;
+            padding: 0.5rem 0;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            scrollbar-width: none; /* Hide scrollbar in Firefox */
         }
 
         .update-screenshots::-webkit-scrollbar {
-            display: none;
+            display: none; /* Hide scrollbar in Chrome/Safari */
         }
 
         .screenshot-item {
-            flex: 0 0 260px;
-            scroll-snap-align: center;
-            text-align: center;
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             user-select: none;
+            box-sizing: border-box;
         }
 
         .screenshot-item img {
             width: 100%;
+            max-width: 280px;
             height: auto;
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid #333;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
             display: block;
             pointer-events: none;
         }
 
         .screenshot-caption {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            margin-top: 0.6rem;
+            margin-top: 0.8rem;
             font-weight: 500;
         }
 
-        /* Carousel Navigation Dots */
+        /* Carousel Navigation Controls */
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .carousel-arrow {
+            background-color: #2a2a2a;
+            color: var(--text);
+            border: 1px solid #3d3d3d;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+            user-select: none;
+        }
+
+        .carousel-arrow:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .carousel-arrow:active {
+            transform: scale(0.92);
+        }
+
         .carousel-dots {
             display: flex;
-            justify-content: center;
+            align-items: center;
             gap: 0.5rem;
-            margin-top: 0.5rem;
         }
 
         .dot {
@@ -211,7 +249,7 @@
 
         .dot.active {
             background-color: var(--primary);
-            transform: scale(1.2);
+            transform: scale(1.25);
         }
 
         footer {
@@ -309,8 +347,11 @@
                         </div>
                     </div>
 
-                    <!-- Indicator Dots -->
-                    <div class="carousel-dots" id="carouselDots"></div>
+                    <div class="carousel-controls">
+                        <button class="carousel-arrow" id="prevBtn" aria-label="Previous screenshot">‹</button>
+                        <div class="carousel-dots" id="carouselDots"></div>
+                        <button class="carousel-arrow" id="nextBtn" aria-label="Next screenshot">›</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -329,34 +370,50 @@
         const track = document.getElementById('screenshotsTrack');
         const dotsContainer = document.getElementById('carouselDots');
         const slides = track.querySelectorAll('.screenshot-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
 
-        // Dynamically create interactive navigation dots
+        let currentIndex = 0;
+
+        function scrollToSlide(index) {
+            if (index < 0) index = 0;
+            if (index >= slides.length) index = slides.length - 1;
+            slides[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }
+
+        // Generate interactive dots
         slides.forEach((slide, index) => {
             const dot = document.createElement('button');
             dot.classList.add('dot');
             dot.setAttribute('aria-label', `Slide ${index + 1}`);
             if (index === 0) dot.classList.add('active');
 
-            dot.addEventListener('click', () => {
-                slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            });
-
+            dot.addEventListener('click', () => scrollToSlide(index));
             dotsContainer.appendChild(dot);
         });
 
-        // Track swipe position and update active dot
+        // Previous & Next navigation
+        prevBtn.addEventListener('click', () => {
+            scrollToSlide(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            scrollToSlide(currentIndex + 1);
+        });
+
+        // Track active slide to update indicator dots
         const dots = dotsContainer.querySelectorAll('.dot');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const index = Array.from(slides).indexOf(entry.target);
+                    currentIndex = Array.from(slides).indexOf(entry.target);
                     dots.forEach(d => d.classList.remove('active'));
-                    if (dots[index]) dots[index].classList.add('active');
+                    if (dots[currentIndex]) dots[currentIndex].classList.add('active');
                 }
             });
         }, {
             root: track,
-            threshold: 0.6
+            threshold: 0.7
         });
 
         slides.forEach(slide => observer.observe(slide));
