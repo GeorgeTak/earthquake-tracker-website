@@ -3,187 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earthquake Tracker - Live Seismic Monitoring</title>
+    <title>Earthquake Tracker - Live Radar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">🚨 Earthquake Tracker</div>
-        <img src="images/earthquake.png" alt="Earthquake Tracker Logo" class="app-logo">
-        <p class="tagline">Real-time global seismic monitoring, custom distance alerts, and live USGS map integrations.</p>
-    </header>
-
-    <main>
-        <h2>Key Features</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>🌍 Real-Time Data</h3>
-                <p>Direct integration with the USGS global API to fetch recent seismic events accurate to the minute.</p>
-            </div>
-            <div class="card">
-                <h3>📍 Proximity Radius</h3>
-                <p>Filter magnitude thresholds and seismic activity within a custom radius from your current location.</p>
-            </div>
-            <div class="card">
-                <h3>🔔 Instant Alerts</h3>
-                <p>High-priority notifications and safety alarms triggered when high-magnitude quakes are detected nearby (planned for a future update).</p>
-            </div>
-            <div class="card">
-                <h3>🗺️ Live Seismic Radar</h3>
-                <p>Switch seamlessly between list view and an interactive radar map with locked rotation, magnitude pins, and instant epicenter details.</p>
-            </div>
+    <!-- Modernized Electric Navbar -->
+    <nav class="navbar">
+        <div class="brand-logo">
+            ⚡ <span>Earthquake</span> Tracker
         </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#info">Info</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-        <section class="updates-section">
-            <h2>Release History & Updates</h2>
+    <!-- Main Showcase Section -->
+    <main>
+        <!-- Centered Rounded Frame -->
+        <div class="showcase-frame">
+            <!-- 1. Top Column Welcome Message -->
+            <h1 class="primary-message">
+                Welcome to our app,<br>
+                <span class="highlight">Earthquake Tracker : Live Radar</span>
+            </h1>
 
-            <div class="update-card">
-                <span class="version-badge">Version 1.0.6 (Latest)</span>
-                <ul class="update-list">
-                    <li>
-                        <strong>Home Location Pin:</strong> Turn on your personal location to drop an intuitive Home Pin on the radar map and instantly measure your distance from any earthquake epicenter.
-                    </li>
-                    <li>
-                        <strong>Dual Magnitude Range Filter:</strong> Set both custom minimum and maximum magnitude boundaries to isolate and view only the seismic events you want to track.
-                    </li>
-                    <li>
-                        <strong>Tsunami Warning Hazard Markers:</strong> Integrated real-time hazard indicators alert you directly on the map when seismic events trigger active tsunami advisories.
-                    </li>
-                </ul>
+            <!-- 2. Row with Icon Badge & Mobile Screenshot -->
+            <div class="showcase-row">
+                <!-- Icon Badge -->
+                <div class="icon-badge">
+                    <img src="images/earthquake.png" alt="App Icon Badge" class="badge-image" onerror="this.src='earthquake.png'">
+                </div>
 
-                <div class="carousel-wrapper">
-                    <div class="update-screenshots" id="track-106">
-                        <div class="screenshot-item">
-                            <img src="images/home_pin.jpg" alt="Radar map showing personal home pin" onerror="this.onerror=null; this.src='images/home_pin_screen.jpg';">
-                            <div class="screenshot-caption">📍 Personal Home Pin</div>
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="images/double_mag_range.jpg" alt="Dual minimum and maximum magnitude range filter" onerror="this.onerror=null; this.src='images/magnitude_range_screen.jpg';">
-                            <div class="screenshot-caption">🎚️ Dual Magnitude Range</div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-controls">
-                        <button class="carousel-arrow" id="prevBtn-106" aria-label="Previous screenshot">‹</button>
-                        <div class="carousel-dots" id="dots-106"></div>
-                        <button class="carousel-arrow" id="nextBtn-106" aria-label="Next screenshot">›</button>
-                    </div>
+                <!-- Mobile Screenshot -->
+                <div class="mobile-screenshot-wrapper">
+                    <img src="images/home_pin.jpg" alt="Mobile App Screenshot" class="mobile-screenshot" onerror="this.src='home_pin.jpg'">
                 </div>
             </div>
-            
-            <div class="update-card">
-                <span class="version-badge">Version 1.0.5</span>
-                <ul class="update-list">
-                    <li>
-                        <strong>Tectonic Plate Boundaries & Fault Lines:</strong> Trace Earth's major fault lines directly on the interactive map with a dedicated switch button to toggle them on or off anytime.
-                    </li>
-                    <li>
-                        <strong>Seismic Education & Insights:</strong> Explore dynamic tectonic plate mechanics and understand where over 80% of global earthquakes strike along converging and shifting plates.
-                    </li>
-                    <li>
-                        <strong>Hazards & Haptic Feedback:</strong> Includes active volcano overlays, nuclear power plant markers, and magnitude-scaled vibration feedback.
-                    </li>
-                </ul>
 
-                <!-- Swipeable Screenshots Carousel -->
-                <div class="carousel-wrapper">
-                    <div class="update-screenshots" id="track-105">
-                        <div class="screenshot-item">
-                            <img src="images/fault_lines_screen.png" alt="Interactive map showing orange fault lines and seismic pins">
-                            <div class="screenshot-caption">🗺️ Fault Lines Map Overlay</div>
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="images/tectonic_plate_info.png" alt="In-app guide explaining tectonic plates and fault line boundaries">
-                            <div class="screenshot-caption">ℹ️ Tectonic Plates Guide</div>
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="images/volcanoes-map.png" alt="Map view showing active volcano pins">
-                            <div class="screenshot-caption">🌋 Volcano Overlays</div>
-                        </div>
-                        <div class="screenshot-item">
-                            <img src="images/nuclear-plants-map.png" alt="Map view showing global nuclear power plant locations">
-                            <div class="screenshot-caption">☢️ Nuclear Power Plants</div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-controls">
-                        <button class="carousel-arrow" id="prevBtn-105" aria-label="Previous screenshot">‹</button>
-                        <div class="carousel-dots" id="dots-105"></div>
-                        <button class="carousel-arrow" id="nextBtn-105" aria-label="Next screenshot">›</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <!-- 3. Bottom Column Message -->
+            <p class="sub-message">Track the quakes that you desire.</p>
+        </div>
     </main>
 
+    <!-- Centered Privacy Policy Outside The Frame -->
     <footer>
-        <p>&copy; 2026 Earthquake Tracker. All rights reserved.</p>
-        <p>
-            <a href="https://play.google.com/store/apps/details?id=com.tak.flutter.earthquake_app" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
-            <span>•</span>
-            <a href="privacy-policy.html">Privacy Policy</a>
-        </p>
+        <a href="privacy-policy.html" class="privacy-link">Privacy Policy</a>
     </footer>
 
-<script>
-        function setupCarousel(trackId, dotsId, prevBtnId, nextBtnId) {
-            const track = document.getElementById(trackId);
-            const dotsContainer = document.getElementById(dotsId);
-            const prevBtn = document.getElementById(prevBtnId);
-            const nextBtn = document.getElementById(nextBtnId);
-
-            if (!track || !dotsContainer) return;
-
-            const slides = track.querySelectorAll('.screenshot-item');
-            let currentIndex = 0;
-
-            function scrollToSlide(index) {
-                if (index < 0) index = 0;
-                if (index >= slides.length) index = slides.length - 1;
-                slides[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-            }
-
-            // Create dots dynamically
-            slides.forEach((slide, index) => {
-                const dot = document.createElement('button');
-                dot.classList.add('dot');
-                dot.setAttribute('aria-label', `Slide ${index + 1}`);
-                if (index === 0) dot.classList.add('active');
-
-                dot.addEventListener('click', () => scrollToSlide(index));
-                dotsContainer.appendChild(dot);
-            });
-
-            // Button listeners
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => scrollToSlide(currentIndex - 1));
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => scrollToSlide(currentIndex + 1));
-            }
-
-            // Sync active dot with scrolling
-            const dots = dotsContainer.querySelectorAll('.dot');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        currentIndex = Array.from(slides).indexOf(entry.target);
-                        dots.forEach(d => d.classList.remove('active'));
-                        if (dots[currentIndex]) dots[currentIndex].classList.add('active');
-                    }
-                });
-            }, {
-                root: track,
-                threshold: 0.7
-            });
-
-            slides.forEach(slide => observer.observe(slide));
-        }
-
-        // Initialize both version carousels
-        setupCarousel('track-106', 'dots-106', 'prevBtn-106', 'nextBtn-106');
-        setupCarousel('track-105', 'dots-105', 'prevBtn-105', 'nextBtn-105');
-    </script>
 </body>
 </html>
