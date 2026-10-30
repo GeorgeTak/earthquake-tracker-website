@@ -250,3 +250,119 @@ footer {
         padding: 2rem 1.25rem;
     }
 }
+
+/* Centered Contact Frame */
+.contact-frame {
+    background: linear-gradient(145deg, var(--card-black), #0d0f17);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 35px rgba(0, 229, 255, 0.12), inset 0 0 20px rgba(0, 229, 255, 0.03);
+    border-radius: 28px;
+    padding: 3rem 2.5rem;
+    max-width: 650px;
+    width: 100%;
+    margin: 3rem auto 0 auto;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.contact-title {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.contact-title .highlight {
+    color: var(--electric-blue);
+    text-shadow: 0 0 14px var(--electric-blue-glow);
+}
+
+.contact-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Contact Unordered List */
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Single Contact Row */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: rgba(16, 18, 26, 0.85);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 18px;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 20px var(--electric-blue-glow);
+}
+
+/* Icon Container */
+.contact-icon {
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+/* Label & Link Column */
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    overflow: hidden;
+}
+
+.contact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--electric-blue);
+    font-weight: 600;
+}
+
+.contact-value {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    word-break: break-all;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.contact-value:hover {
+    color: var(--electric-blue);
+    text-shadow: 0 0 8px var(--electric-blue-glow);
+}
+
+@media (max-width: 640px) {
+    .contact-frame {
+        padding: 2rem 1.25rem;
+    }
+    
+    .contact-item {
+        padding: 0.85rem 1rem;
+        gap: 1rem;
+    }
+}
