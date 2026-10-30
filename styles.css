@@ -179,7 +179,7 @@ main {
 
 .mobile-screenshot {
     width: 180px;
-    height: auto;
+    height: 110px;
     border-radius: 22px;
     border: 2px solid rgba(0, 229, 255, 0.4);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 229, 255, 0.2);
